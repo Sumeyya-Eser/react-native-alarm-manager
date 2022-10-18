@@ -22,9 +22,5 @@ public class AlarmPackage implements ReactPackage {
     modules.add(new AlarmModule(reactContext));
     return modules;
   }
-
-  @Override
-  public List<Class<? extends JavaScriptModule>> createJSModules() {
-    return null;
-  }
+  
 }

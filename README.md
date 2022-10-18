@@ -43,13 +43,13 @@ Alarm for React Native
 #### npm
 
 ```bash
-$ npm install react-native-alarm-manager
+$ npm install refactored-native-alarm
 ```
 
 #### yarn
 
 ```bash
-$ yarn add react-native-alarm-manager
+$ yarn add rrefactored-native-alarm
 ```
 
 ### Manipulating codes in your project
