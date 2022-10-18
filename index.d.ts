@@ -1,6 +1,6 @@
 import * as React from "react";
 
-declare module "react-native-refactored-alarm" {
+declare module "react-native-updated-alarm" {
   export interface AlarmType {
     alarm_id: number;
     alarm_time: string;
