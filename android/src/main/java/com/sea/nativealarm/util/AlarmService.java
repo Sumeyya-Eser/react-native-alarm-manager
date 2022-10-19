@@ -32,14 +32,16 @@ public class AlarmService extends Service {
         }
 
         Intent notiIntent = new Intent(this, getMainActivity());
-        notiIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        notiIntent.setAction(Intent.ACTION_MAIN);
+        notiIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+        notiIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         notiIntent.putExtra("id", intent.getIntExtra("id", 0));
         notiIntent.putExtra("hour", intent.getIntExtra("hour", 0));
         notiIntent.putExtra("minute", intent.getIntExtra("minute", 0));
         notiIntent.putExtra("notiRemovable", intent.getBooleanExtra("notiRemovable", true));
 
-        PendingIntent notiPendingIntent = PendingIntent.getActivity(this, 0, notiIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent notiPendingIntent = PendingIntent.getActivity(this, 0, notiIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
                 .setContentTitle(intent.getStringExtra("title"))
@@ -47,6 +49,7 @@ public class AlarmService extends Service {
                 .setSmallIcon(getResources().getIdentifier(intent.getStringExtra("icon"), "drawable", packageName))
                 .setContentIntent(notiPendingIntent)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+
 
         this.startForeground(1, builder.build());
 
@@ -81,7 +84,7 @@ public class AlarmService extends Service {
 
     private Class getMainActivity(){
         Intent intent = getPackageManager().getLaunchIntentForPackage(packageName);
-        String className = intent.getComponent().getClassName();
+        String className = "com.actimi.telecare.MainActivity";
 
         try {
             return Class.forName(className);
